@@ -1,0 +1,8 @@
+<web-app version="3.0">
+
+    <display-name>Restaurant Servlet</display-name>
+
+    <welcome-file-list>
+        <welcome-file>/WEB-INF/view/index.jsp</welcome-file>
+    </welcome-file-list>
+</web-app>

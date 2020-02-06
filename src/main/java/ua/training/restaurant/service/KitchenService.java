@@ -1,0 +1,21 @@
+package ua.training.restaurant.service;
+
+import org.apache.log4j.Logger;
+import ua.training.restaurant.entity.order.Order;
+import ua.training.restaurant.entity.order.Order_Status;
+
+import static java.time.LocalDateTime.now;
+
+/**
+ * Created by Student
+ */
+public class KitchenService {
+    final static Logger log = Logger.getLogger(KitchenService.class);
+
+    public static Order cookDishes(Order order) {
+        log.info("Order is cooking");
+        order.setStatus(Order_Status.READY);
+        order.setReady(now());
+        return order;
+    }
+}
