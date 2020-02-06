@@ -97,7 +97,7 @@ public class JDBCOrderDao implements OrderDao {
 
     private Order saveOrderUnits(Order order) { //todo
         String query;
-        
+
     }
 
     @Override
