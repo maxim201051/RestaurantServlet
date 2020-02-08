@@ -1,9 +1,11 @@
 package ua.training.restaurant.servlet.command;
 
 import org.apache.log4j.Logger;
-import ua.training.restaurant.service.KitchenService;
+import ua.training.restaurant.entity.user.User;
+import ua.training.restaurant.exceptions.UserDataNotValidException;
 import ua.training.restaurant.service.UserService;
 import ua.training.restaurant.service.UserServiceImpl;
+import ua.training.restaurant.utils.Validator;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -28,30 +30,34 @@ public class SignUp implements Command {
     }
 
     private String doGet(HttpServletRequest request) {
-
         return "/WEB-INF/view/signup.jsp";
     }
 
     private String doPost(HttpServletRequest request) {
         String url;
-        log.info("trying to register new user");
-        if (result.hasErrors()) {
+        try {
+            String username = request.getParameter("username");
+            String password = request.getParameter("password");
+            String nameEn = request.getParameter("nameEn");
+            String nameUa = request.getParameter("nameUa");
+            Validator.throwExIfUserNotValid(username, password, nameEn, nameUa);
+            User user = new User();
+            user.setUsername(username);
+            user.setPassword(password);
+            user.setNameEN(nameEn);
+            user.setNameUA(nameUa);
+            userService.setDefaultParams(user);
+            userService.save(user);
+            url = "redirect:/login";
+        } catch (UserDataNotValidException e) {
             log.error("Invalid data");
-            modelAndView.addObject("failureMessage", "signup.label.error");
-            modelAndView.setViewName("signup");
-        } else {
-            try {
-                user.setPassword(passwordEncoder.encode(user.getPassword()));
-                userService.setDefaultParams(user);
-                userService.saveOrUpdate(user);
-                modelAndView.setViewName("redirect:/login");
-            } catch (Exception e) {
-                log.error("username already exists");
-                modelAndView.addObject("failureMessage", "signup.label.alreadyRegistered");
-                modelAndView.setViewName("signup");
-            }
+            request.setAttribute("validationFailureMessage", "validationFailureMessage");
+            url = "/WEB-INF/view/signup.jsp";
+        } catch (Exception e) {
+            log.error("username already exists");
+            request.setAttribute("errorMessage", "errorMessage");
+            url = "/WEB-INF/view/signup.jsp";
         }
-        return modelAndView;
         return url;
     }
 }

@@ -4,7 +4,6 @@ import org.apache.log4j.Logger;
 import ua.training.restaurant.entity.order.Order;
 import ua.training.restaurant.entity.order.Order_Status;
 import ua.training.restaurant.exceptions.OrderNotFoundException;
-import ua.training.restaurant.service.KitchenService;
 import ua.training.restaurant.service.OrderService;
 import ua.training.restaurant.service.OrderServiceImpl;
 
@@ -33,7 +32,9 @@ public class MakeBill implements Command {
         } catch (OrderNotFoundException e) {
             log.error("cannot find order by id " + id);
             request.setAttribute("failureMessage", "order.label.failureMessage");
+        } catch (Exception e) {
+            log.error(e);
         }
-        return "redirect:/admin/billmaking";
+        return "redirect:/billmaking";
     }
 }

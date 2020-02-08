@@ -1,7 +1,7 @@
 package ua.training.restaurant.servlet.command;
 
 import org.apache.log4j.Logger;
-import ua.training.restaurant.service.KitchenService;
+import ua.training.restaurant.entity.order.Order;
 import ua.training.restaurant.utils.Utils;
 
 import javax.servlet.http.HttpServletRequest;
@@ -23,7 +23,8 @@ public class ShoppingCart implements Command {
 
     public String doGet(HttpServletRequest request) {
         log.info("getting shoppingcart page");
-        request.setAttribute("order", Utils.getOrderInSession(request));
+        Order order = Utils.getOrderInSession(request);
+        request.setAttribute("order", order);
         return "WEB-INF/view/shoppingcart.jsp";
     }
 

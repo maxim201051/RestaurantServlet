@@ -4,7 +4,9 @@ import org.apache.log4j.Logger;
 import ua.training.restaurant.dao.DaoFactory;
 import ua.training.restaurant.dao.UserDao;
 import ua.training.restaurant.entity.user.User;
-import ua.training.restaurant.service.KitchenService;
+import ua.training.restaurant.service.OrderService;
+import ua.training.restaurant.service.UserService;
+import ua.training.restaurant.service.UserServiceImpl;
 import ua.training.restaurant.utils.AppUtils;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,6 +16,11 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class Login implements Command {
     final static Logger log = Logger.getLogger(Login.class);
+    private UserService userService;
+
+    public Login() {
+        userService = new UserServiceImpl();
+    }
 
     public String execute(HttpServletRequest request) {
         String res = null;
@@ -26,6 +33,7 @@ public class Login implements Command {
 
     private String doGet(HttpServletRequest request) {
         log.info("getting login page");
+        request.getSession().invalidate();
         return "/WEB-INF/view/login.jsp";
     }
 
@@ -33,24 +41,16 @@ public class Login implements Command {
         String url;
         String username = request.getParameter("username");
         String password = request.getParameter("password");
-        DaoFactory daoFactory = DaoFactory.getInstance();//TODO
-        User user = null;
-        try (UserDao userDao = daoFactory.createUserDao()) {
-            user = userDao.findByUsernameAndPassword(username, password).orElseGet(null);
+        User user;
+        try {
+            user = userService.findByUsernameAndPassword(username,password);
         } catch (Exception e) {
             log.error(e);
-        }
-
-        //DataDAO.findByUsernameAndPassword(username, password);
-
-
-        if (user == null) {
             String errorMessage = "errorMessage";
             request.setAttribute("errorMessage", errorMessage);
             url = "/WEB-INF/view/login.jsp";
             return url;
         }
-
         AppUtils.storeLoginedUser(request.getSession(), user);
 
         //
@@ -58,6 +58,7 @@ public class Login implements Command {
         try {
             redirectId = Integer.parseInt(request.getParameter("redirectId"));
         } catch (Exception e) {
+            log.error(e);
         }
         String requestUri = AppUtils.getRedirectAfterLoginUrl(redirectId);
         if (requestUri != null) {
@@ -65,8 +66,8 @@ public class Login implements Command {
         } else {
             // По умолчанию после успешного входа в систему
             // перенаправить на страницу роли
-            url = "redirect:/signup"; //TODO
-            //url = request.getContextPath() + "/" + userAccount.getAuthorities().get(0).getAuthority().toLowerCase();
+            //url = "redirect:/signup"; //TODO
+            url = "redirect:/" + user.getAuthorities().get(0).name().toLowerCase();
         }
         return url;
     }

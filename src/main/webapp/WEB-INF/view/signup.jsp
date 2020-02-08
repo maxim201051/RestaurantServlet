@@ -32,13 +32,13 @@
             <fmt:message key="authentication.label.enterData"/>
         </h2>
         <c:if test="${pageContext.request.getAttribute('validationFailureMessage') != null}">
-            <label>
-                <fmt:message key="signup.label.alreadyRegistered"/>
+            <label class="alert alert-danger" role="alert">
+                <fmt:message key="signup.label.error"/>
             </label>
         </c:if>
         <c:if test="${pageContext.request.getAttribute('errorMessage') != null}">
-            <label>
-                <fmt:message key="signup.label.error"/>
+            <label class="alert alert-danger" role="alert">
+                <fmt:message key="signup.label.alreadyRegistered"/>
             </label>
         </c:if>
         <p>

@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServletRequest;
  * Created by Student on 03.02.2020
  */
 public class AcceptOrder implements Command {
-    private OrderService orderService;
     private final static Logger log = Logger.getLogger(AcceptOrder.class);
+    private OrderService orderService;
 
     public AcceptOrder() {
         this.orderService = new OrderServiceImpl();
@@ -27,7 +27,9 @@ public class AcceptOrder implements Command {
         } catch (OrderNotFoundException e) {
             log.error("cannot find order by id " + id);
             request.setAttribute("failureMessage", "failureMessage");
+        } catch (Exception e) {
+            log.error(e);
         }
-        return "redirect:/admin/orderconfirmation";
+        return "redirect:/orderconfirmation";
     }
 }

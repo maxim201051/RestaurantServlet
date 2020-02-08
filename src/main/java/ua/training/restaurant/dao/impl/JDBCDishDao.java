@@ -5,7 +5,6 @@ import ua.training.restaurant.dao.DishDao;
 import ua.training.restaurant.dao.GenericDao;
 import ua.training.restaurant.dao.mapper.DishMapper;
 import ua.training.restaurant.entity.Dish;
-import ua.training.restaurant.service.KitchenService;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -33,7 +32,7 @@ public class JDBCDishDao implements DishDao {
             this.prop = new Properties();
             this.prop.load(fis);
         } catch (IOException e) {
-            log.error(e.getMessage()); //todo
+            log.error(e);
         }
         this.connection = connection;
     }
@@ -44,6 +43,7 @@ public class JDBCDishDao implements DishDao {
         String query = MessageFormat.format(prop.getProperty("dishes.findById"), id);
         try (Statement st = connection.createStatement()) {
             ResultSet rs = st.executeQuery(query);
+            rs.next();
             DishMapper dishMapper = new DishMapper();
             dish = Optional.of(dishMapper.extractFromResultSet(rs));
         } catch (SQLException e) {

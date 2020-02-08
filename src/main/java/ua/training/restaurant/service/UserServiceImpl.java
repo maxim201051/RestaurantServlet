@@ -1,13 +1,11 @@
 package ua.training.restaurant.service;
 
-import org.apache.log4j.Logger;
 import ua.training.restaurant.dao.DaoFactory;
 import ua.training.restaurant.dao.UserDao;
 import ua.training.restaurant.entity.order.Order;
 import ua.training.restaurant.entity.user.Role;
 import ua.training.restaurant.entity.user.User;
 import ua.training.restaurant.exceptions.UserNotFoundException;
-import ua.training.restaurant.servlet.command.AcceptOrder;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -18,47 +16,32 @@ import java.util.List;
  */
 public class UserServiceImpl implements UserService {
     private DaoFactory daoFactory = DaoFactory.getInstance();
-    private final static Logger log = Logger.getLogger(UserServiceImpl.class);
-
 
     @Override
-    public User save(User user) {
+    public User save(User user) throws Exception {
         try (UserDao dao = daoFactory.createUserDao()) {
             return dao.save(user);
-        } catch (Exception e) {
-            log.error(e);
         }
-        return user;
     }
 
     @Override
-    public User update(User user) {
+    public User update(User user) throws Exception {
         try (UserDao dao = daoFactory.createUserDao()) {
             return dao.update(user);
-        } catch (Exception e) {
-            log.error(e);
         }
-        return user;
     }
 
     @Override
-    public User findByUsernameAndPassword(String username, String password) throws UserNotFoundException {
-        User user = null;
+    public User findByUsernameAndPassword(String username, String password) throws Exception {
         try (UserDao dao = daoFactory.createUserDao()) {
-            user = dao.findByUsernameAndPassword(username, password).orElseThrow(UserNotFoundException::new);
-        } catch (Exception e) {
-            log.error(e);
+            return dao.findByUsernameAndPassword(username, password).orElseThrow(UserNotFoundException::new);
         }
-        return user;
     }
 
-    public List<User> findAllUsers() { //means role.user
+    public List<User> findAllUsers() throws Exception { //means role.user
         try (UserDao dao = daoFactory.createUserDao()) {
             return dao.findByAuthoritiesContaining(Role.USER);
-        } catch (Exception e) {
-            log.error(e);
         }
-        return new ArrayList<>();
     }
 
     @Override
@@ -82,7 +65,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User addFunds(User user, Long funds) {
+    public User addFunds(User user, Long funds) throws Exception {
         user.setFunds(user.getFunds() + funds);
         update(user);
         return user;

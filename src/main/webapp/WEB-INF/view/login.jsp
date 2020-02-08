@@ -33,7 +33,7 @@
             <fmt:message key="authentication.label.enterData"/>
         </h2>
         <c:if test="${pageContext.request.getAttribute('errorMessage') != null}">
-            <label>
+            <label class="alert alert-danger" role="alert">
                 <fmt:message key="login.label.error"/>
             </label>
         </c:if>

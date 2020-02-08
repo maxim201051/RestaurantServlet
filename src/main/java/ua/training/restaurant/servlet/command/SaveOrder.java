@@ -4,7 +4,6 @@ import org.apache.log4j.Logger;
 import ua.training.restaurant.entity.order.Order;
 import ua.training.restaurant.entity.user.User;
 import ua.training.restaurant.exceptions.EmptyOrderException;
-import ua.training.restaurant.service.KitchenService;
 import ua.training.restaurant.service.OrderService;
 import ua.training.restaurant.service.OrderServiceImpl;
 import ua.training.restaurant.utils.Utils;
@@ -33,7 +32,9 @@ public class SaveOrder implements Command {
         } catch (EmptyOrderException e) {
             log.error("order is empty");
             request.setAttribute("failureMessage", "failureMessage");
+        } catch (Exception e) {
+            log.error(e);
         }
-        return "redirect:/user/shoppingcart";
+        return "redirect:/shoppingcart";
     }
 }

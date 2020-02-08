@@ -10,7 +10,6 @@ import ua.training.restaurant.entity.order.Order_Status;
 import ua.training.restaurant.entity.user.User;
 import ua.training.restaurant.exceptions.EmptyOrderException;
 import ua.training.restaurant.exceptions.OrderNotFoundException;
-import ua.training.restaurant.servlet.command.AcceptOrder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,61 +29,45 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<Order> findByUser(User user) {
+    public List<Order> findByUser(User user) throws Exception {
         try (OrderDao dao = daoFactory.createOrderDao()) {
             return dao.findByUser(user);
-        } catch (Exception e) {
-            log.error(e);
         }
-        return new ArrayList<>();
     }
 
     @Override
-    public Order findById(Long id) throws OrderNotFoundException {
-        Order order = null;
+    public Order findById(Long id) throws Exception {
         try (OrderDao dao = daoFactory.createOrderDao()) {
-            order = dao.findById(id).orElseThrow(OrderNotFoundException::new);
-        } catch (Exception e) {
-            log.error(e);
+            return dao.findById(id).orElseThrow(OrderNotFoundException::new);
         }
-        return order;
     }
 
     @Override
-    public Order save(Order order, User user) throws EmptyOrderException {
+    public Order save(Order order, User user) throws Exception {
         if (!order.isEmpty()) {
             order.setUser(user);
             order.setStatus(Order_Status.CREATED);
             order.setCreated(now());
             try (OrderDao dao = daoFactory.createOrderDao()) {
                 return dao.save(order);
-            } catch (Exception e) {
-                log.error(e);
             }
         } else {
             throw new EmptyOrderException();
         }
-        return order;
     }
 
     @Override
-    public List<Order> findByStatus(Order_Status order_status) {
+    public List<Order> findByStatus(Order_Status order_status) throws Exception {
         try (OrderDao dao = daoFactory.createOrderDao()) {
             return dao.findByStatus(order_status);
-        } catch (Exception e) {
-            log.error(e);
         }
-        return new ArrayList<>();
     }
 
     @Override
-    public Order update(Order order) {
+    public Order update(Order order) throws Exception {
         try (OrderDao dao = daoFactory.createOrderDao()) {
             return dao.update(order);
-        } catch (Exception e) {
-            log.error(e);
         }
-        return order;
     }
 
     private Optional<OrderUnit> findOrderUnitById(Order order, Long id) {
@@ -136,19 +119,16 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<Order> findByUserId(Long id) {
+    public List<Order> findByUserId(Long id) throws Exception {
         try (OrderDao dao = daoFactory.createOrderDao()) {
             List<Order> orders = dao.findByUserId(id);
             makeUserUnique(orders);
             return orders;
-        } catch (Exception e) {
-            log.error(e);
         }
-        return new ArrayList<>();
     }
 
     @Override
-    public void confirmOrder(Long id) throws OrderNotFoundException {
+    public void confirmOrder(Long id) throws Exception {
         Order order = findById(id);
         order.setAccepted(now());
         order.setStatus(Order_Status.ACCEPTED);

@@ -56,8 +56,8 @@
                             <td><span><c:out value="${dish.nameEn}"/></span></td>
                             <td><span><c:out value="${dish.nameUa}"/></span></td>
                             <td><span><c:out value="${dish.portion}"/></span></td>
-                            <td><span><c:out value="${dish.price}"/></span></td>
-                            <td><a href="${pageContext.request.contextPath}/user/buyproduct?id=${dish.id}">
+                            <td><span><fmt:formatNumber value="${dish.price}" type="currency"/></span></td>
+                            <td><a href="${pageContext.request.contextPath}/buyproduct?id=${dish.id}">
                                 <fmt:message key="foodmenu.button.addtoorder"/>
                             </a></td>
                         </c:forEach>
@@ -66,7 +66,7 @@
                 </table>
             </div>
             <div align="center">
-                <a class="btn" href="${pageContext.request.contextPath}/user/shoppingcart">
+                <a class="btn" href="${pageContext.request.contextPath}/shoppingcart">
                     <fmt:message key="foodmenu.button.confirmation"/>
                 </a>
             </div>

@@ -1,7 +1,6 @@
 package ua.training.restaurant.servlet.command;
 
 import org.apache.log4j.Logger;
-import ua.training.restaurant.service.KitchenService;
 import ua.training.restaurant.service.UserService;
 import ua.training.restaurant.service.UserServiceImpl;
 
@@ -21,7 +20,11 @@ public class UserStatistics implements Command {
     @Override
     public String execute(HttpServletRequest request) {
         log.info("getting userstatistics page");
-        request.setAttribute("users", userService.findAllUsers());
+        try {
+            request.setAttribute("users", userService.findAllUsers());
+        } catch (Exception e) {
+            log.error(e);
+        }
         return "WEB-INF/view/userstatistics.jsp";
     }
 }

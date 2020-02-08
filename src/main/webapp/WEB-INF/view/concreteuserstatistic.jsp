@@ -65,12 +65,22 @@
                             <td><span><c:out value="${order.id}"/></span></td>
                             <td><span><fmt:formatNumber value="order.amountTotal" type="currency"/></span></td>
                             <td><span><c:out value="${order.status}"/></span></td>
-                            <td><span><fmt:formatDate value="${order.created}" pattern="'dd-MM-yyyy HH:mm'"/></span>
-                            </td>
-                            <td><span><fmt:formatDate value="${order.accepted}" pattern="'dd-MM-yyyy HH:mm'"/></span>
-                            </td>
-                            <td><span><fmt:formatDate value="${order.ready}" pattern="'dd-MM-yyyy HH:mm'"/></span></td>
-                            <td><span><fmt:formatDate value="${order.paid}" pattern="'dd-MM-yyyy HH:mm'"/></span></td>
+                            <td><span>
+                                <fmt:parseDate value="${order.created}" pattern="yyyy-MM-dd'T'HH:mm" var="createdParsed" type="both"/>
+                                <fmt:formatDate value="${createdParsed}" pattern="'dd-MM-yyyy HH:mm'"/>
+                            </span></td>
+                            <td><span>
+                                <fmt:parseDate value="${order.accepted}" pattern="yyyy-MM-dd'T'HH:mm" var="acceptedParsed" type="both"/>
+                                <fmt:formatDate value="${acceptedParsed}" pattern="'dd-MM-yyyy HH:mm'"/>
+                            </span></td>
+                            <td><span>
+                                <fmt:parseDate value="${order.ready}" pattern="yyyy-MM-dd'T'HH:mm" var="readyParsed" type="both"/>
+                                <fmt:formatDate value="${readyParsed}" pattern="'dd-MM-yyyy HH:mm'"/>
+                            </span></td>
+                            <td><span>
+                                <fmt:parseDate value="${order.paid}" pattern="yyyy-MM-dd'T'HH:mm" var="paidParsed" type="both"/>
+                                <fmt:formatDate value="${paidParsed}" pattern="'dd-MM-yyyy HH:mm'"/>
+                            </span></td>
                             <td><a href="${pageContext.request.contextPath}/order?id=${order.id}">
                                 <fmt:message key="differentpages.label.view"/>
                             </a></td>

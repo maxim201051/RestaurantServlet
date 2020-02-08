@@ -22,7 +22,15 @@ public class SecurityConfig {
         List<String> urlPatterns1 = new ArrayList<>();
 
         urlPatterns1.add("/user");
-        urlPatterns1.add("/user/*");
+        urlPatterns1.add("/addfunds");
+        urlPatterns1.add("/billpaying");
+        urlPatterns1.add("/buyproduct");
+        urlPatterns1.add("/concreteuserstatistic");
+        urlPatterns1.add("/foodmenu");
+        urlPatterns1.add("/paybill");
+        urlPatterns1.add("/saveorder");
+        urlPatterns1.add("/shoppingcart");
+        urlPatterns1.add("/shoppingcartremovedish");
         urlPatterns1.add("/order");
 
         mapConfig.put(Role.USER.name(), urlPatterns1);

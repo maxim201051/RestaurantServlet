@@ -1,7 +1,6 @@
 package ua.training.restaurant.servlet.command;
 
 import org.apache.log4j.Logger;
-import ua.training.restaurant.service.KitchenService;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -14,6 +13,6 @@ public class LogOut implements Command {
     public String execute(HttpServletRequest request) {
         log.info("user logged out");
         request.getSession().invalidate();
-        return "redirect:/login.jsp";
+        return "redirect:/login";
     }
 }
