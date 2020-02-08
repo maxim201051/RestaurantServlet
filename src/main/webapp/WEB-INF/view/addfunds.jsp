@@ -24,7 +24,7 @@
 </head>
 <body>
 <jsp:include page="_menu.jsp"/>
-<div align="center" action="/addfunds" class="container"> //TODO
+<div align="center" action="/addfunds" class="container">
     <h1>
         <fmt:message key="addfunds.label.header"/>
     </h1>
@@ -32,7 +32,9 @@
         <label>
             <fmt:message key="addfunds.label.currentfunds"/>
         </label>
-        <label text="${loginedUser.funds}"></label>
+        <label>
+            <c:out value="${loginedUser.funds}"/>
+        </label>
     </p>
 
     <div align="center">
@@ -42,7 +44,7 @@
             </label>
         </c:if>
     </div>
-    <form action="/addfunds" method="post">
+    <form action="${pageContext.request.contextPath}/addfunds" method="POST">
         <h2 class="form-signin-heading">
             <fmt:message key="authentication.label.enterData"/>
         </h2>

@@ -51,7 +51,7 @@
                     <fmt:message key="dish.label.failureMessage"/>
                 </label>
             </c:if>
-            <form method="post" action="/user/saveorder">
+            <form method="post" action="${pageContext.request.contextPath}/saveorder">
                 <div class="table">
                     <table>
                         <thead class="table-head">
@@ -71,13 +71,13 @@
                             <c:if test="${pageContext.request.getAttribute('order').isEmpty()}">
                             <td colspan="8">
                                 <fmt:message key="shoppingcart.label.noItems"/>
-                                <a href="${pageContext.request.contextPath}/user/foodmenu">
+                                <a href="${pageContext.request.contextPath}/foodmenu">
                                     <fmt:message key="foodmenu.title"/>
                                 </a>
                             </td>
                             </c:if>
                         <tr>
-                            <c:forEach var="order_unit" items="${pageContext.request.getAttribute('order').oderUnits}">
+                            <c:forEach var="order_unit" items="${pageContext.request.getAttribute('order').orderUnits}">
                                 <td><span><c:out value="${order_unit.dish.nameEn}"/></span></td>
                                 <td><span><c:out value="${order_unit.dish.nameUa}"/></span></td>
                                 <td><span><c:out value="${order_unit.dish.portion}"/></span></td>
@@ -85,9 +85,9 @@
                                 </td>
                                 <td><input id="quantity" type="number"><c:out value="${order_unit.quantity}"/></td>
                                 <td><a><fmt:message key="shoppingcart.button.updateQuantity"/></a></td>
-                                <td><span><c:out value="${order_unit.amount}"/></span></td>
+                                <td><span><fmt:formatNumber value="${order_unit.amount}" type="currency"/></span></td>
                                 <td>
-                                    <a href="${pageContext.request.contextPath}/user/shoppingcartremovedish?id=${order_unit.dish.id}">
+                                    <a href="${pageContext.request.contextPath}/shoppingcartremovedish?id=${order_unit.dish.id}">
                                         <fmt:message key="shoppingcart.button.delete"/>
                                     </a>
                                 </td>

@@ -34,7 +34,9 @@ public class BuyProduct implements Command {
         } catch (DishNotFoundException e) {
             log.error("cannot find dish by id " + id);
             request.setAttribute("failureMessage", "failureMessage");
+        } catch (Exception e) {
+            log.error(e);
         }
-        return "redirect:/user/foodmenu";
+        return "redirect:/foodmenu";
     }
 }

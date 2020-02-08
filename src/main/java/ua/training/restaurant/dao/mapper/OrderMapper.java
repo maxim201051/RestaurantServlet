@@ -13,7 +13,6 @@ import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 /**
  * Created by Student on 26.01.2020
@@ -23,7 +22,7 @@ public class OrderMapper implements ObjectMapper<Order> {
     public Order extractFromResultSet(ResultSet rs) throws SQLException {
         Order order = new Order();
         order.setId(rs.getLong("order_id"));
-        order.setAccepted(parseIfNotNull(rs.getTimestamp("accepted")));//todo null
+        order.setAccepted(parseIfNotNull(rs.getTimestamp("accepted")));
         order.setCreated(parseIfNotNull(rs.getTimestamp("created")));
         order.setPaid(parseIfNotNull(rs.getTimestamp("paid")));
         order.setReady(parseIfNotNull(rs.getTimestamp("ready")));
@@ -60,7 +59,7 @@ public class OrderMapper implements ObjectMapper<Order> {
 
     private LocalDateTime parseIfNotNull(Timestamp timestamp) {
         LocalDateTime time = null;
-        if(timestamp != null) {
+        if (timestamp != null) {
             time = timestamp.toLocalDateTime();
         }
         return time;

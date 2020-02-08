@@ -6,14 +6,10 @@ import ua.training.restaurant.dao.UserDao;
 import ua.training.restaurant.dao.mapper.UserMapper;
 import ua.training.restaurant.entity.user.Role;
 import ua.training.restaurant.entity.user.User;
-import ua.training.restaurant.service.KitchenService;
 
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -48,7 +44,7 @@ public class JDBCUserDao implements UserDao {
 
     @Override
     public Optional<User> findByUsernameAndPassword(String username, String password) {
-        String query = MessageFormat.format(prop.getProperty("users.findByUsernameAndPassword"), username, password);
+        String query = MessageFormat.format(prop.getProperty("users.findByUsernameAndPassword"), "'" + username + "'", "'" + password + "'");
         return findUser(query);
     }
 
@@ -56,6 +52,7 @@ public class JDBCUserDao implements UserDao {
         Optional<User> user;
         try (Statement st = connection.createStatement()) {
             ResultSet rs = st.executeQuery(query);
+            rs.next();
             UserMapper userMapper = new UserMapper();
             user = Optional.of(userMapper.extractFromResultSet(rs));
         } catch (SQLException e) {
@@ -91,22 +88,26 @@ public class JDBCUserDao implements UserDao {
     }
 
     @Override
-    public User save(User user) {
-        String query = "";
-        return saveOrUpdate(user, query);
+    public User save(User user) throws SQLException {
+        String query = MessageFormat.format(prop.getProperty("users.save"), "'" + user.getNameEN() + "'", "'" + user.getNameUA() + "'",
+                "'" + user.getPassword() + "'", "'" + user.getRegistrationDate() + "'", "'" + user.getUsername() + "'");
+        saveOrUpdate(user, query);
+        query = MessageFormat.format(prop.getProperty("user_authorities.save"), "");
+        saveOrUpdate(user, query);
+        return user;
     }
 
     @Override
-    public User update(User user) {
-        String query = "";
+    public User update(User user) throws SQLException {
+        String query = MessageFormat.format(prop.getProperty("users.update"), user.getFunds().toString(), user.getOrdersNumber(), user.getOrdersTotalCost(), user.getId());
         return saveOrUpdate(user, query);
     }
 
-    private User saveOrUpdate(User user, String query) {
-        try (Statement st = connection.createStatement()) {
-            st.executeQuery(query);
-        } catch (SQLException e) {
-            //Todo
+    private User saveOrUpdate(User user, String query) throws SQLException {
+
+        log.info(query);
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.executeUpdate();
         }
         return user;
     }

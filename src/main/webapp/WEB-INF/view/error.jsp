@@ -51,9 +51,13 @@
     <div class="notfound">
         <div class="notfound-404">
             <h1>Oops!</h1>
-            <h2 th:text="#{error.label.info}"></h2>
+            <h2>
+                <fmt:message key="error.label.info"/>
+            </h2>
         </div>
-        <a href="/index" th:text="#{error.label.homePage}"></a>
+        <a href="${pageContext.request.contextPath}/">
+            <fmt:message key="error.label.homePage"/>
+        </a>
     </div>
 </div>
 

@@ -5,7 +5,6 @@ import ua.training.restaurant.entity.Bill;
 import ua.training.restaurant.entity.order.Order;
 import ua.training.restaurant.entity.order.Order_Status;
 import ua.training.restaurant.entity.user.User;
-import ua.training.restaurant.service.KitchenService;
 import ua.training.restaurant.service.OrderService;
 import ua.training.restaurant.service.OrderServiceImpl;
 
@@ -28,7 +27,12 @@ public class BillPaying implements Command {
     public String execute(HttpServletRequest request) {
         User user = (User) request.getSession().getAttribute("loginedUser");
         log.info("getting billpaying page");
-        List<Order> orders = orderService.findByUser(user);
+        List<Order> orders = null;
+        try {
+            orders = orderService.findByUser(user);
+        } catch (Exception e) {
+            log.error(e);
+        }
         List<Bill> bills = new ArrayList<>();
         orders.stream().filter(x -> x.getStatus().equals(Order_Status.UNPAID)).forEach(x -> bills.add(new Bill(x)));
         request.setAttribute("bills", bills);

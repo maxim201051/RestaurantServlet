@@ -41,13 +41,15 @@
             <fmt:message key="billmaking.label.userOrders"/>
         </div>
         <div class="wrap-table">
-            <div align="center" class="alert alert-danger" role="alert">
-                <c:if test="${pageContext.request.getAttribute('failureMessage') != null}">
-                    <label>
-                        <fmt:message key="order.label.failureMessage"/>
-                    </label>
-                </c:if>
-            </div>
+            <c:if test="${pageContext.request.getAttribute('failureMessage') != null}">
+                <div align="center" class="alert alert-danger" role="alert">
+
+                        <label>
+                            <fmt:message key="order.label.failureMessage"/>
+                        </label>
+                </div>
+            </c:if>
+
             <div class="table">
                 <table>
                     <thead class="table-head">
@@ -72,9 +74,12 @@
                             <td><span><c:out value="${order.user.username}"/></span></td>
                             <td><span><c:out value="${order.quantityTotal}"/></span></td>
                             <td><span><fmt:formatNumber value="${order.amountTotal}" type="currency"/></span></td>
-                            <td><span><fmt:formatDate value="${order.created}" pattern="dd-MM-yyyy HH:mm"/></span></td>
-                            <td><a href="${pageContext.request.contextPath}/admin/makebill?id=${order.id})">
-                                <fmt:message var="billmaking.button.makeBill"/>
+                            <td><span>
+                                <fmt:parseDate value="${order.created}" pattern="yyyy-MM-dd'T'HH:mm" var="createdParsed" type="both"/>
+                                <fmt:formatDate value="${createdParsed}" pattern="dd-MM-yyyy HH:mm"/>
+                            </span></td>
+                            <td><a href="${pageContext.request.contextPath}/makebill?id=${order.id}">
+                                <fmt:message key="billmaking.button.makeBill"/>
                             </a></td>
                         </c:forEach>
                     </tr>

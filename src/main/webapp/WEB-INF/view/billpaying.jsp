@@ -70,7 +70,7 @@
                         <c:forEach var="bill" items="${pageContext.request.getAttribute('bills')}">
                             <td><span><c:out value="${bill.id}"/></span></td>
                             <td><span><fmt:formatNumber value="${bill.totalCost}"/></span></td>
-                            <td><a href="${pageContext.request.contextPath}/user/paybill?id=${bill.id})">
+                            <td><a href="${pageContext.request.contextPath}/paybill?id=${bill.id}">
                                 <fmt:message key="billpaying.button.payBill"/>
                             </a></td>
                         </c:forEach>

@@ -9,7 +9,7 @@ import java.util.List;
  * Created by Student
  */
 public interface DishService {
-    List<Dish> findAll();
+    List<Dish> findAll() throws Exception;
 
-    Dish findByID(Long id) throws DishNotFoundException;
+    Dish findByID(Long id) throws Exception;
 }

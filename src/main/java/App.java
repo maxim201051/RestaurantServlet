@@ -1,4 +1,5 @@
 import org.apache.log4j.Logger;
+import ua.training.restaurant.entity.RegexContainer;
 import ua.training.restaurant.entity.user.Role;
 import ua.training.restaurant.service.KitchenService;
 
@@ -17,6 +18,6 @@ public class App {
         prop.load(fis);
         String query=MessageFormat.format(prop.getProperty("dishes.findAll"), "");
         System.out.println(query);*/
-        System.out.println(Role.USER.ordinal());
+        System.out.println(RegexContainer.NAME_REGEX);
     }
 }

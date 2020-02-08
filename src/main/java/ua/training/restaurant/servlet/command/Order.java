@@ -2,7 +2,6 @@ package ua.training.restaurant.servlet.command;
 
 import org.apache.log4j.Logger;
 import ua.training.restaurant.exceptions.OrderNotFoundException;
-import ua.training.restaurant.service.KitchenService;
 import ua.training.restaurant.service.OrderService;
 import ua.training.restaurant.service.OrderServiceImpl;
 
@@ -27,7 +26,7 @@ public class Order implements Command {
         try {
             request.setAttribute("order", orderService.findById(id));
             url = "WEB-INF/view/order.jsp";
-        } catch (OrderNotFoundException e) {
+        } catch (Exception e) {
             log.error("cannot find order by id " + id);
             url = "redirect:/";
         }

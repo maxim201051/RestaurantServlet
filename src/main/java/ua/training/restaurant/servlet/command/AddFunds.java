@@ -4,7 +4,7 @@ import org.apache.log4j.Logger;
 import ua.training.restaurant.entity.user.User;
 import ua.training.restaurant.service.UserService;
 import ua.training.restaurant.service.UserServiceImpl;
-import ua.training.restaurant.utils.Utils;
+import ua.training.restaurant.utils.Validator;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -37,15 +37,15 @@ public class AddFunds implements Command {
         String url;
         log.info("trying to add funds to user account");
         try {
-            Long funds = (Long) request.getAttribute("funds");
+            Long funds = Long.parseLong(request.getParameter("funds"));
             User user = (User) request.getSession().getAttribute("loginedUser");
-            Utils.throwExIfFundsNotValid(funds);
+            Validator.throwExIfFundsNotValid(funds);
             userService.addFunds(user, funds);
-            url = "redirect:/user/";
+            url = "redirect:/user";
         } catch (Exception e) {
             log.error("invalid funds");
             request.setAttribute("failureMessage", "failureMessage");
-            url = "redirect:/user/addfunds";
+            url = "WEB-INF/view/addfunds.jsp";
         }
         return url;
     }

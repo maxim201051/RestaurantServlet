@@ -11,14 +11,7 @@
 <%@ page isELIgnored="false" %>
 <fmt:setLocale value="${sessionScope.lang}"/>
 <fmt:setBundle basename="messages"/>
-<%--<html>
-<head>
-    <title>Title</title>
-</head>
-<body>
 
-</body>
-</html>--%>
 <link rel="stylesheet" type="text/css" href="css/menu.css"/>
 <div class="menu-row">
     <div class="menu-container">
@@ -26,38 +19,38 @@
             <fmt:message key="home.title"/>
         </a>
         |
-        <c:if test="${pageContext.request.isUserInRole('ROLE_USER')}">
-            <a href="${pageContext.request.contextPath}/user/foodmenu(page=1)">
+        <c:if test="${pageContext.request.isUserInRole('USER')}">
+            <a href="${pageContext.request.contextPath}/foodmenu">
                 <fmt:message key="foodmenu.title"/>
             </a>
             |
-            <a href="${pageContext.request.contextPath}/user/shoppingcart">
+            <a href="${pageContext.request.contextPath}/shoppingcart">
                 <fmt:message key="shoppingcart.title"/>
             </a>
             |
-            <a href="${pageContext.request.contextPath}/user/addfunds">
+            <a href="${pageContext.request.contextPath}/addfunds">
                 <fmt:message key="addfunds.title"/>
             </a>
             |
-            <a href="${pageContext.request.contextPath}/user/billpaying">
-                <fmt:message key="billmakint.title"/>
+            <a href="${pageContext.request.contextPath}/billpaying">
+                <fmt:message key="billpayind.title"/>
             </a>
             |
-            <a href="${pageContext.request.contextPath}/user/concreteuserstatistic">
+            <a href="${pageContext.request.contextPath}/concreteuserstatistic">
                 <fmt:message key="concreteuserstatistic.title"/>
             </a>
             |
         </c:if>
-        <c:if test="${pageContext.request.isUserInRole('ROLE_ADMIN')}">
-            <a href="${pageContext.request.contextPath}/admin/orderconfirmation">
+        <c:if test="${pageContext.request.isUserInRole('ADMIN')}">
+            <a href="${pageContext.request.contextPath}/orderconfirmation">
                 <fmt:message key="orderconfirmation.title"/>
             </a>
             |
-            <a href="${pageContext.request.contextPath}/admin/billmaking">
+            <a href="${pageContext.request.contextPath}/billmaking">
                 <fmt:message key="billmakint.title"/>
             </a>
             |
-            <a href="${pageContext.request.contextPath}/admin/userstatistics">
+            <a href="${pageContext.request.contextPath}/userstatistics">
                 <fmt:message key="userstatistics.title"/>
             </a>
             |
@@ -65,8 +58,8 @@
     </div>
     <div class="header-container">
         <div class="header-bar">
-            <a utext="${loginedUser.userName}"></a>
-            <c:if test="${loginedUser.userName != null}">
+            <a><c:out value="${loginedUser.username}"/></a>
+            <c:if test="${loginedUser.username != null}">
                 &nbsp;|&nbsp;
                 <a href="${pageContext.request.contextPath}/logout">
                     <fmt:message key="authentication.label.logout"/>

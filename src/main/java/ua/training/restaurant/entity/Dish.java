@@ -8,7 +8,7 @@ public class Dish {
     private String nameEn;
     private String nameUa;
     private Long portion; //in grams
-    private Long price; //in US pennies
+    private Long price;
 
     public Dish() {
 
