@@ -43,7 +43,7 @@ public class JDBCOrderDao implements OrderDao {
     }
 
     @Override
-    public Optional<Order> findById(Long id) {//todo
+    public Optional<Order> findById(Long id) {
         String query = MessageFormat.format(prop.getProperty("orders.genericQuery"), SEARCH_COLUMN_ORDER_ID, id.toString());
         return Optional.of(findOrderList(query).get(0));
     }

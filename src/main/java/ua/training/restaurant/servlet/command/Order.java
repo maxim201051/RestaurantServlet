@@ -22,7 +22,7 @@ public class Order implements Command {
     public String execute(HttpServletRequest request) {
         String url;
         Long id = Long.parseLong(request.getParameter("id"));
-        log.info("getting userstatistics page");
+        log.info("getting order info page");
         try {
             request.setAttribute("order", orderService.findById(id));
             url = "WEB-INF/view/order.jsp";

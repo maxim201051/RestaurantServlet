@@ -43,10 +43,9 @@
         <div class="wrap-table">
             <c:if test="${pageContext.request.getAttribute('failureMessage') != null}">
                 <div align="center" class="alert alert-danger" role="alert">
-
-                        <label>
-                            <fmt:message key="order.label.failureMessage"/>
-                        </label>
+                    <label>
+                        <fmt:message key="order.label.failureMessage"/>
+                    </label>
                 </div>
             </c:if>
 

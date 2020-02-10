@@ -54,7 +54,7 @@ public class Login implements Command {
         AppUtils.storeLoginedUser(request.getSession(), user);
 
         //
-        int redirectId = -1;
+        int redirectId = -1;//Todo не видит redirectId
         try {
             redirectId = Integer.parseInt(request.getParameter("redirectId"));
         } catch (Exception e) {
@@ -64,9 +64,6 @@ public class Login implements Command {
         if (requestUri != null) {
             url = "redirect:/" + requestUri;
         } else {
-            // По умолчанию после успешного входа в систему
-            // перенаправить на страницу роли
-            //url = "redirect:/signup"; //TODO
             url = "redirect:/" + user.getAuthorities().get(0).name().toLowerCase();
         }
         return url;

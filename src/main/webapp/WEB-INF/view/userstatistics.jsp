@@ -65,10 +65,10 @@
                             <td><span><fmt:formatNumber value="${user.funds}" type="currency"/></span></td>
                             <td><span><c:out value="${user.ordersNumber}"/></span></td>
                             <td><span><c:out value="${user.ordersTotalCost}"/></span></td>
-                            <td><span>
-                                <fmt:parseDate value="${user.registrationDate}" pattern="yyyy-MM-dd'T'HH:mm" var="regDateParsed" type="date"/>
-                                <fmt:formatDate value="${regDateParsed}" pattern="'dd-MM-yyyy'"/>
-                            </span></td>
+<%--                            <td><span>--%>
+<%--                                <fmt:parseDate value="${user.registrationDate}" pattern="yyyy-MM-dd'T'HH:mm" var="regDateParsed" type="date"/>--%>
+<%--                                <fmt:formatDate value="${regDateParsed}" pattern="dd-MM-yyyy"/>--%>
+<%--                            </span></td>--%>
                             <td>
                                 <a href="${pageContext.request.contextPath}/concreteuserstatistic?id=${user.id}">
                                     <fmt:message key="differentpages.label.view"/>

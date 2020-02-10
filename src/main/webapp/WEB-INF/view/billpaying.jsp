@@ -42,14 +42,18 @@
         </div>
         <div class="wrap-table">
             <c:if test="${pageContext.request.getAttribute('failureMessage') != null}">
-                <label>
-                    <fmt:message key="order.label.failureMessage"/>
-                </label>
+                <div  align="center" class="alert alert-danger" role="alert">
+                    <label>
+                        <fmt:message key="order.label.failureMessage"/>
+                    </label>
+                </div>
             </c:if>
             <c:if test="${pageContext.request.getAttribute('notEnoughFundsMessage') != null}">
-                <label>
-                    <fmt:message key="paying.label.notEnoughFunds"/>
-                </label>
+                <div  align="center" class="alert alert-danger" role="alert">
+                    <label>
+                        <fmt:message key="paying.label.notEnoughFunds"/>
+                    </label>
+                </div>
             </c:if>
             <div class="table">
                 <table>
