@@ -33,7 +33,6 @@ public class AuthFilter implements Filter {
         HttpServletResponse response = (HttpServletResponse) resp;
 
         String servletPath = request.getServletPath();
-
         // Информация пользователя сохранена в Session
         // (После успешного входа в систему).
         User loginedUser = AppUtils.getLoginedUser(request.getSession());
@@ -59,7 +58,7 @@ public class AuthFilter implements Filter {
 
         // Страницы требующие входа в систему.
         if (SecurityUtils.isSecurityPage(request)) {
-
+            System.out.println("Security page");
             // Если пользователь еще не вошел в систему,
             // Redirect (перенаправить) к странице логина.
             if (loginedUser == null) {
@@ -78,9 +77,9 @@ public class AuthFilter implements Filter {
             if (!hasPermission) {
 
                 RequestDispatcher dispatcher //
-                        = request.getServletContext().getRequestDispatcher("/WEB-INF/views/" +
-                        loginedUser.getAuthorities().get(0).name().toLowerCase() + ".jsp");
-
+                        = request.getServletContext().getRequestDispatcher("/"+
+                        loginedUser.getAuthorities().get(0).name().toLowerCase());
+                System.out.println("request: "+request.getRequestURI());
                 dispatcher.forward(request, response);
                 return;
             }

@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * Created by Student on 02.02.2020
  */
-public class PayBill implements Command {//todo
+public class PayBill implements Command {
     final static Logger log = Logger.getLogger(PayBill.class);
     private OrderService orderService;
     private UserService userService;
@@ -33,7 +33,7 @@ public class PayBill implements Command {//todo
         try {
             order = orderService.findById(id);
             userService.addOrderToStatistic(user, order);
-            orderService.setPaid(order);// todo transaction
+            orderService.setPaid(order);// todo transaction & failure messages
             userService.update(user);
             orderService.update(order);
         } catch (OrderNotFoundException e) {

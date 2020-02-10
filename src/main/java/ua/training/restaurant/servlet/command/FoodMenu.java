@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * Created by Student on 29.01.2020
  */
-public class FoodMenu implements Command { //todo
+public class FoodMenu implements Command {
     final static Logger log = Logger.getLogger(FoodMenu.class);
     private DishService dishService;
 

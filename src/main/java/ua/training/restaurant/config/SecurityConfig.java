@@ -39,7 +39,13 @@ public class SecurityConfig {
         List<String> urlPatterns2 = new ArrayList<>();
 
         urlPatterns2.add("/admin");
-        urlPatterns2.add("/admin/*");
+        urlPatterns2.add("/userstatistics");
+        urlPatterns2.add("/concreteuserstatistic");
+        urlPatterns2.add("/orderconfirmation");
+        urlPatterns2.add("/acceptorder");
+        urlPatterns2.add("/billmaking");
+        urlPatterns2.add("/makebill");
+        urlPatterns2.add("");
         urlPatterns2.add("/order");
 
         mapConfig.put(Role.ADMIN.name(), urlPatterns2);

@@ -31,7 +31,7 @@ public class JDBCUserDao implements UserDao {
             this.prop = new Properties();
             this.prop.load(fis);
         } catch (IOException e) {
-            log.error(e.getMessage()); //todo
+            log.error(e); //todo
         }
         this.connection = connection;
     }
@@ -99,7 +99,7 @@ public class JDBCUserDao implements UserDao {
 
     @Override
     public User update(User user) throws SQLException {
-        String query = MessageFormat.format(prop.getProperty("users.update"), user.getFunds().toString(), user.getOrdersNumber(), user.getOrdersTotalCost(), user.getId());
+        String query = MessageFormat.format(prop.getProperty("users.update"), user.getFunds().toString(), user.getOrdersNumber(), user.getOrdersTotalCost().toString(), user.getId());
         return saveOrUpdate(user, query);
     }
 
