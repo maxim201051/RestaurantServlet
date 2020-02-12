@@ -8,12 +8,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet"
       integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/WEB-INF/css/footer.css"/>
+<link rel="stylesheet" type="text/css" href="css/footer.css"/>
 <footer id="footer" class="footer-1">
     <div class="main-footer widgets-dark typo-light">
         <div class="container">
             <div class="row" align="center">
-
                 <div class="col-xs-12 col-sm-4 col-md-4">
                     <div class="widget subscribe no-box">
                         <h5 class="widget-title">RESTAURANT<span></span></h5>

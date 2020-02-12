@@ -17,7 +17,7 @@
     <title>
         <fmt:message key="order.title"/>
     </title>
-    <link rel="stylesheet" type="text/css" href="/css/userstatistics.css">
+    <link rel="stylesheet" type="text/css" href="css/userstatistics.css">
     <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
     <!--===============================================================================================-->

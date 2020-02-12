@@ -25,6 +25,6 @@ public class UserStatistics implements Command {
         } catch (Exception e) {
             log.error(e);
         }
-        return "WEB-INF/view/userstatistics.jsp";//todo formatDate
+        return "WEB-INF/view/userstatistics.jsp";
     }
 }
