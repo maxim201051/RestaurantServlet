@@ -31,7 +31,7 @@ public class JDBCUserDao implements UserDao {
             this.prop = new Properties();
             this.prop.load(fis);
         } catch (IOException e) {
-            log.error(e); //todo
+            log.error(e);
         }
         this.connection = connection;
     }

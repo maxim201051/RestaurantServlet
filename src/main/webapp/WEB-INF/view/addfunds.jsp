@@ -18,7 +18,7 @@
     <title>
         <fmt:message key="addfunds.title"/>
     </title>
-    <link rel="stylesheet" type="text/css" href="/WEB-INF/css/footer.css"/>
+    <link rel="stylesheet" type="text/css" href="css/footer.css"/>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
 </head>
