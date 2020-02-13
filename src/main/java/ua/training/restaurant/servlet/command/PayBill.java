@@ -4,10 +4,7 @@ import org.apache.log4j.Logger;
 import ua.training.restaurant.entity.order.Order;
 import ua.training.restaurant.entity.user.User;
 import ua.training.restaurant.exceptions.OrderNotFoundException;
-import ua.training.restaurant.service.OrderService;
-import ua.training.restaurant.service.OrderServiceImpl;
-import ua.training.restaurant.service.UserService;
-import ua.training.restaurant.service.UserServiceImpl;
+import ua.training.restaurant.service.*;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -18,10 +15,12 @@ public class PayBill implements Command {
     final static Logger log = Logger.getLogger(PayBill.class);
     private OrderService orderService;
     private UserService userService;
+    private UserOrderTransactionService service;
 
     public PayBill() {
         orderService = new OrderServiceImpl();
         userService = new UserServiceImpl();
+        service = new UserOrderTransactionServiceImpl();
     }
 
     @Override
@@ -33,9 +32,8 @@ public class PayBill implements Command {
         try {
             order = orderService.findById(id);
             userService.addOrderToStatistic(user, order);
-            orderService.setPaid(order);// todo transaction & failure messages
-            userService.update(user);
-            orderService.update(order);
+            orderService.setPaid(order);
+            service.saveUserAndOrder(user,order);
         } catch (OrderNotFoundException e) {
             log.error("cannot find order by id " + id);
             request.setAttribute("failureMessage", "failureMessage");
