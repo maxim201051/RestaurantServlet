@@ -37,6 +37,6 @@ public class BuyProduct implements Command {
         } catch (Exception e) {
             log.error(e);
         }
-        return "redirect:/foodmenu";
+        return "redirect:/foodmenu?page=1";
     }
 }

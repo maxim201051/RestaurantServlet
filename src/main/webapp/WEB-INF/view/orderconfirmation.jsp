@@ -64,21 +64,22 @@
                             <td colspan="6"><fmt:message key="orderconfirmation.label.noOrders"/></td>
                         </c:if>
                     </tr>
-                    <tr>
-                        <c:forEach var="order" items="${pageContext.request.getAttribute('orders')}">
+                    <c:forEach var="order" items="${pageContext.request.getAttribute('orders')}">
+                        <tr>
                             <td><span><c:out value="${order.id}"/></span></td>
                             <td><span><c:out value="${order.user.username}"/></span></td>
                             <td><span><c:out value="${order.quantityTotal}"/></span></td>
                             <td><span><fmt:formatNumber value="${order.amountTotal}" type="currency"/></span></td>
                             <td><span>
-                                <fmt:parseDate value="${order.created}" pattern="yyyy-MM-dd'T'HH:mm" var="createdParsed" type="both"/>
+                                <fmt:parseDate value="${order.created}" pattern="yyyy-MM-dd'T'HH:mm" var="createdParsed"
+                                               type="both"/>
                                 <fmt:formatDate value="${createdParsed}" pattern="dd-MM-yyyy HH:mm"/>
                             </span></td>
                             <td><a href="${pageContext.request.contextPath}/acceptorder?id=${order.id}">
                                 <fmt:message key="orderconfirmatiom.button.accept"/>
                             </a></td>
-                        </c:forEach>
-                    </tr>
+                        </tr>
+                    </c:forEach>
                     </tbody>
                 </table>
             </div>

@@ -16,7 +16,6 @@ public class AppUtils {
 
     // Сохранить информацию пользователя в Session.
     public static void storeLoginedUser(HttpSession session, User loginedUser) {
-        // На JSP можно получить доступ через ${loginedUser}
         session.setAttribute("loginedUser", loginedUser);
     }
 

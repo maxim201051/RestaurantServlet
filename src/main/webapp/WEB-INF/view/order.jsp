@@ -47,15 +47,15 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <c:forEach var="order_unit" items="${pageContext.request.getAttribute('order').orderUnits}">
+                    <c:forEach var="order_unit" items="${pageContext.request.getAttribute('order').orderUnits}">
+                        <tr>
                             <td><span><c:out value="${order_unit.dish.nameUa}"/></span></td>
                             <td><span><c:out value="${order_unit.dish.nameEn}"/></span></td>
                             <td><span><c:out value="${order_unit.dish.portion}"/></span></td>
                             <td><span><fmt:formatNumber value="${order_unit.dish.price}" type="currency"/></span></td>
                             <td><span><c:out value="${order_unit.quantity}"/></span></td>
-                        </c:forEach>
-                    </tr>
+                        </tr>
+                    </c:forEach>
                     </tbody>
                 </table>
             </div>

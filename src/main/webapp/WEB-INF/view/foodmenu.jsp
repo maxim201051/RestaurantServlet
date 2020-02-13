@@ -51,8 +51,8 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <c:forEach var="dish" items="${pageContext.request.getAttribute('dishes')}">
+                    <c:forEach var="dish" items="${pageContext.request.getAttribute('dishes')}">
+                        <tr>
                             <td><span><c:out value="${dish.nameEn}"/></span></td>
                             <td><span><c:out value="${dish.nameUa}"/></span></td>
                             <td><span><c:out value="${dish.portion}"/></span></td>
@@ -60,8 +60,8 @@
                             <td><a href="${pageContext.request.contextPath}/buyproduct?id=${dish.id}">
                                 <fmt:message key="foodmenu.button.addtoorder"/>
                             </a></td>
-                        </c:forEach>
-                    </tr>
+                        </tr>
+                    </c:forEach>
                     </tbody>
                 </table>
             </div>

@@ -69,15 +69,16 @@
                         <tbody>
                         <tr>
                             <c:if test="${pageContext.request.getAttribute('order').isEmpty()}">
-                            <td colspan="8">
-                                <fmt:message key="shoppingcart.label.noItems"/>
-                                <a href="${pageContext.request.contextPath}/foodmenu">
-                                    <fmt:message key="foodmenu.title"/>
-                                </a>
-                            </td>
+                                <td colspan="8">
+                                    <fmt:message key="shoppingcart.label.noItems"/>
+                                    <a href="${pageContext.request.contextPath}/foodmenu?page=1">
+                                        <fmt:message key="foodmenu.title"/>
+                                    </a>
+                                </td>
                             </c:if>
-                        <tr>
-                            <c:forEach var="order_unit" items="${pageContext.request.getAttribute('order').orderUnits}">
+                        </tr>
+                        <c:forEach var="order_unit" items="${pageContext.request.getAttribute('order').orderUnits}">
+                            <tr>
                                 <td><span><c:out value="${order_unit.dish.nameEn}"/></span></td>
                                 <td><span><c:out value="${order_unit.dish.nameUa}"/></span></td>
                                 <td><span><c:out value="${order_unit.dish.portion}"/></span></td>
@@ -91,8 +92,9 @@
                                         <fmt:message key="shoppingcart.button.delete"/>
                                     </a>
                                 </td>
-                            </c:forEach>
-                        </tr>
+                            </tr>
+                        </c:forEach>
+
                         </tbody>
                     </table>
                 </div>
