@@ -57,8 +57,8 @@
                             <td colspan="8"><fmt:message key="userstatistics.label.noUsers"/></td>
                         </c:if>
                     </tr>
-                    <tr>
-                        <c:forEach var="user" items="${pageContext.request.getAttribute('users')}">
+                    <c:forEach var="user" items="${pageContext.request.getAttribute('users')}">
+                        <tr>
                             <td><span><c:out value="${user.username}"/></span></td>
                             <td><span><c:out value="${user.nameUA}"/></span></td>
                             <td><span><c:out value="${user.nameEN}"/></span></td>
@@ -66,7 +66,8 @@
                             <td><span><c:out value="${user.ordersNumber}"/></span></td>
                             <td><span><c:out value="${user.ordersTotalCost}"/></span></td>
                             <td><span>
-                                <fmt:parseDate value="${user.registrationDate}" pattern="yyyy-MM-dd" var="regDateParsed" type="date"/>
+                                <fmt:parseDate value="${user.registrationDate}" pattern="yyyy-MM-dd" var="regDateParsed"
+                                               type="date"/>
                                 <fmt:formatDate value="${regDateParsed}" pattern="dd-MM-yyyy"/>
                             </span></td>
                             <td>
@@ -74,8 +75,8 @@
                                     <fmt:message key="differentpages.label.view"/>
                                 </a>
                             </td>
-                        </c:forEach>
-                    </tr>
+                        </tr>
+                    </c:forEach>
                     </tbody>
                 </table>
             </div>

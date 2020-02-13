@@ -19,7 +19,7 @@
     </title>
     <link rel="stylesheet"
           type="text/css"
-          href="css/index.css"
+          href="css/userstatistics.css"
     />
     <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
@@ -42,14 +42,14 @@
         </div>
         <div class="wrap-table">
             <c:if test="${pageContext.request.getAttribute('failureMessage') != null}">
-                <div  align="center" class="alert alert-danger" role="alert">
+                <div align="center" class="alert alert-danger" role="alert">
                     <label>
                         <fmt:message key="order.label.failureMessage"/>
                     </label>
                 </div>
             </c:if>
             <c:if test="${pageContext.request.getAttribute('notEnoughFundsMessage') != null}">
-                <div  align="center" class="alert alert-danger" role="alert">
+                <div align="center" class="alert alert-danger" role="alert">
                     <label>
                         <fmt:message key="paying.label.notEnoughFunds"/>
                     </label>
@@ -70,15 +70,15 @@
                             <td colspan="3"><fmt:message key="billpaying.label.noBills"/></td>
                         </c:if>
                     </tr>
-                    <tr>
-                        <c:forEach var="bill" items="${pageContext.request.getAttribute('bills')}">
+                    <c:forEach var="bill" items="${pageContext.request.getAttribute('bills')}">
+                        <tr>
                             <td><span><c:out value="${bill.id}"/></span></td>
                             <td><span><fmt:formatNumber value="${bill.totalCost}"/></span></td>
                             <td><a href="${pageContext.request.contextPath}/paybill?id=${bill.id}">
                                 <fmt:message key="billpaying.button.payBill"/>
                             </a></td>
-                        </c:forEach>
-                    </tr>
+                        </tr>
+                    </c:forEach>
                     </tbody>
                 </table>
             </div>
