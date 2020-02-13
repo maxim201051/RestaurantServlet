@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
  * Created by Student on 29.01.2020
  */
 public class FoodMenu implements Command {
-    public static final int RECORDS_PER_PAGE = 10;
     final static Logger log = Logger.getLogger(FoodMenu.class);
     private DishService dishService;
 
@@ -20,13 +19,11 @@ public class FoodMenu implements Command {
 
     @Override
     public String execute(HttpServletRequest request) {
-        int page = Integer.parseInt(request.getParameter("page"))-1;
         log.info("getting food menu page");
         try {
-            request.setAttribute("dishes", dishService.findAll(page, RECORDS_PER_PAGE));
+            request.setAttribute("dishes", dishService.findAll());
         } catch (Exception e) {
             log.error(e);
-            throw new RuntimeException(e);
         }
         return "WEB-INF/view/foodmenu.jsp";
     }

@@ -8,5 +8,5 @@ import java.util.List;
  * Created by Student on 26.01.2020
  */
 public interface DishDao extends GenericDao<Dish> {
-    List<Dish> findAll(int firstIndex, int elementsNumber);
+    List<Dish> findAll();
 }
