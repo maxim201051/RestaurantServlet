@@ -33,6 +33,7 @@ public class JDBCDishDao implements DishDao {
             this.prop.load(fis);
         } catch (IOException e) {
             log.error(e);
+            throw new RuntimeException(e);
         }
         this.connection = connection;
     }
@@ -53,9 +54,9 @@ public class JDBCDishDao implements DishDao {
     }
 
     @Override
-    public List<Dish> findAll() {
+    public List<Dish> findAll(int firstIndex, int elementsNumber) {
         List<Dish> dishes = new ArrayList<>();
-        String query = MessageFormat.format(prop.getProperty("dishes.findAll"), "");
+        String query = MessageFormat.format(prop.getProperty("dishes.findAll"),elementsNumber, firstIndex);
         try (Statement st = connection.createStatement()) {
             ResultSet rs = st.executeQuery(query);
             DishMapper dishMapper = new DishMapper();

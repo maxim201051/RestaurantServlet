@@ -38,6 +38,7 @@ public class JDBCOrderDao implements OrderDao {
             this.prop.load(fis);
         } catch (IOException e) {
             log.error(e);
+            throw new RuntimeException(e);
         }
         this.connection = connection;
     }

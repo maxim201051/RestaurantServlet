@@ -9,4 +9,8 @@
         <exception-type>java.lang.Exception</exception-type>
         <location>/WEB-INF/view/internalservererror.jsp</location>
     </error-page>
+    <servlet-mapping>
+        <servlet-name>default</servlet-name>
+        <url-pattern>/css</url-pattern>
+    </servlet-mapping>
 </web-app>

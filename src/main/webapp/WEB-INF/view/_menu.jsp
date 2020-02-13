@@ -20,7 +20,7 @@
         </a>
         |
         <c:if test="${pageContext.request.isUserInRole('USER')}">
-            <a href="${pageContext.request.contextPath}/foodmenu">
+            <a href="${pageContext.request.contextPath}/foodmenu?page=1">
                 <fmt:message key="foodmenu.title"/>
             </a>
             |
