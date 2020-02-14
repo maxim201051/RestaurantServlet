@@ -33,8 +33,8 @@ public class AuthFilter implements Filter {
         HttpServletResponse response = (HttpServletResponse) resp;
 
         String servletPath = request.getServletPath();
-        // Информация пользователя сохранена в Session
-        // (После успешного входа в систему).
+        // User information successfully stored in  Session
+        // (After successful login).
         User loginedUser = AppUtils.getLoginedUser(request.getSession());
 
         if (servletPath.equals("/")) {
@@ -47,32 +47,32 @@ public class AuthFilter implements Filter {
             // User Name
             String userName = loginedUser.getUsername();
 
-            // Роли (Role).
+            // Roles.
             List<String> roles = new ArrayList<>();
             loginedUser.getAuthorities().forEach(a -> roles.add(a.name()));
 
 
-            // Старый пакет request с помощью нового Request с информацией userName и Roles.
+            // Old request packet with new Request with userName and Roles information.
             wrapRequest = new UserRoleRequestWrapper(userName, roles, request);
         }
 
-        // Страницы требующие входа в систему.
+        // Pages requiring login.
         if (SecurityUtils.isSecurityPage(request)) {
             System.out.println("Security page");
-            // Если пользователь еще не вошел в систему,
-            // Redirect (перенаправить) к странице логина.
+            // If user not logined,
+            // Redirect to login page.
             if (loginedUser == null) {
 
                 String requestUri = request.getRequestURI();
 
-                // Сохранить текущую страницу для перенаправления (redirect) после успешного входа в систему.
+                // Save current page to redirect after successful login.
                 int redirectId = AppUtils.storeRedirectAfterLoginUrl(request.getSession(), requestUri);
 
                 response.sendRedirect(wrapRequest.getContextPath() + "/login?redirectId=" + redirectId);
                 return;
             }
 
-            // Проверить пользователь имеет действительную роль или нет?
+            // Check user has a valid role or not?
             boolean hasPermission = SecurityUtils.hasPermission(wrapRequest);
             if (!hasPermission) {
 
