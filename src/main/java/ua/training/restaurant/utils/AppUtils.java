@@ -14,12 +14,12 @@ public class AppUtils {
     private static final Map<String, Integer> uri_id_map = new HashMap<>();
     private static int REDIRECT_ID = 0;
 
-    // Сохранить информацию пользователя в Session.
+    // Save user info in Session.
     public static void storeLoginedUser(HttpSession session, User loginedUser) {
         session.setAttribute("loginedUser", loginedUser);
     }
 
-    // Получить информацию пользователя, сохраненную в Session.
+    // Get user info from Session.
     public static User getLoginedUser(HttpSession session) {
         return (User) session.getAttribute("loginedUser");
     }

@@ -21,25 +21,39 @@ public class OrderMapper implements ObjectMapper<Order> {
     @Override
     public Order extractFromResultSet(ResultSet rs) throws SQLException {
         Order order = new Order();
+
         order.setId(rs.getLong("order_id"));
         order.setAccepted(parseIfNotNull(rs.getTimestamp("accepted")));
         order.setCreated(parseIfNotNull(rs.getTimestamp("created")));
         order.setPaid(parseIfNotNull(rs.getTimestamp("paid")));
         order.setReady(parseIfNotNull(rs.getTimestamp("ready")));
         order.setStatus(Order_Status.values()[rs.getInt("status")]);
+
+        order.setOrderUnits(extractOrderUnitsFromResultSet(rs));
+
+        order.setUser(extractUserFromResultSet(rs));
+        return order;
+    }
+
+    private List<OrderUnit> extractOrderUnitsFromResultSet(ResultSet rs) throws SQLException {
         Dish dish = new Dish();
         dish.setId(rs.getLong("dish_id"));
         dish.setNameEn(rs.getString("dish_name_en"));
         dish.setNameUa(rs.getString("dish_name_ua"));
         dish.setPortion(rs.getLong("portion"));
         dish.setPrice(rs.getLong("price"));
+
         OrderUnit orderUnit = new OrderUnit();
         orderUnit.setDish(dish);
         orderUnit.setId(rs.getLong("order_unit_id"));
         orderUnit.setQuantity(rs.getInt("quantity"));
+
         List<OrderUnit> orderUnits = new ArrayList<>();
         orderUnits.add(orderUnit);
-        order.setOrderUnits(orderUnits);
+        return orderUnits;
+    }
+
+    private User extractUserFromResultSet(ResultSet rs) throws SQLException {
         User user = new User();
         user.setId(rs.getLong("user_id"));
         user.setFunds(rs.getLong("funds"));
@@ -50,11 +64,11 @@ public class OrderMapper implements ObjectMapper<Order> {
         user.setPassword(rs.getString("password"));
         user.setRegistrationDate(rs.getDate("registration_date").toLocalDate());
         user.setUsername(rs.getString("username"));
+
         ArrayList<Role> authorities = new ArrayList<>();
         authorities.add(Role.values()[rs.getInt("authorities")]);
         user.setAuthorities(authorities);
-        order.setUser(user);
-        return order;
+        return user;
     }
 
     private LocalDateTime parseIfNotNull(Timestamp timestamp) {
