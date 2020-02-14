@@ -21,7 +21,6 @@ import static java.time.LocalDateTime.now;
  * Created by Student
  */
 public class OrderServiceImpl implements OrderService {
-    private final static Logger log = Logger.getLogger(OrderServiceImpl.class);
     private DaoFactory daoFactory;
 
     public OrderServiceImpl() {
