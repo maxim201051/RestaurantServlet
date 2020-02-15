@@ -77,9 +77,9 @@ public class AuthFilter implements Filter {
             if (!hasPermission) {
 
                 RequestDispatcher dispatcher //
-                        = request.getServletContext().getRequestDispatcher("/"+
+                        = request.getServletContext().getRequestDispatcher("/" +
                         loginedUser.getAuthorities().get(0).name().toLowerCase());
-                System.out.println("request: "+request.getRequestURI());
+                System.out.println("request: " + request.getRequestURI());
                 dispatcher.forward(request, response);
                 return;
             }

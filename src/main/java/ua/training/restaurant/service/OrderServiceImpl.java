@@ -1,6 +1,5 @@
 package ua.training.restaurant.service;
 
-import org.apache.log4j.Logger;
 import ua.training.restaurant.dao.DaoFactory;
 import ua.training.restaurant.dao.OrderDao;
 import ua.training.restaurant.entity.Dish;
@@ -11,7 +10,6 @@ import ua.training.restaurant.entity.user.User;
 import ua.training.restaurant.exceptions.EmptyOrderException;
 import ua.training.restaurant.exceptions.OrderNotFoundException;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 

@@ -20,7 +20,7 @@ public class FoodMenu implements Command {
 
     @Override
     public String execute(HttpServletRequest request) {
-        int page = Integer.parseInt(request.getParameter("page"))-1;
+        int page = Integer.parseInt(request.getParameter("page")) - 1;
         log.info("getting food menu page");
         try {
             request.setAttribute("dishes", dishService.findAll(page, RECORDS_PER_PAGE));

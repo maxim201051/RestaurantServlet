@@ -7,7 +7,6 @@ import ua.training.restaurant.dao.mapper.UserMapper;
 import ua.training.restaurant.entity.user.Role;
 import ua.training.restaurant.entity.user.User;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.*;
 import java.text.MessageFormat;
@@ -27,9 +26,8 @@ public class JDBCUserDao implements UserDao {
 
     public JDBCUserDao(Connection connection) {
         try {
-            FileInputStream fis = new FileInputStream(GenericDao.PROPERTY_FILE_PATH);
             this.prop = new Properties();
-            this.prop.load(fis);
+            this.prop.load(JDBCUserDao.class.getClassLoader().getResourceAsStream(GenericDao.PROPERTY_FILE_PATH));
         } catch (IOException e) {
             log.error(e);
             throw new RuntimeException(e);

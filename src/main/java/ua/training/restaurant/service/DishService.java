@@ -1,7 +1,6 @@
 package ua.training.restaurant.service;
 
 import ua.training.restaurant.entity.Dish;
-import ua.training.restaurant.exceptions.DishNotFoundException;
 
 import java.util.List;
 

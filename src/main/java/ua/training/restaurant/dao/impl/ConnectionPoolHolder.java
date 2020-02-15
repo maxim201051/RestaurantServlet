@@ -5,7 +5,6 @@ import org.apache.log4j.Logger;
 import ua.training.restaurant.dao.GenericDao;
 
 import javax.sql.DataSource;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
@@ -19,9 +18,8 @@ public class ConnectionPoolHolder {
 
     static {
         try {
-            FileInputStream fis = new FileInputStream(GenericDao.CONNECTION_PROPERTIES_FILE_PATH);
             prop = new Properties();
-            prop.load(fis);
+            prop.load(ConnectionPoolHolder.class.getClassLoader().getResourceAsStream(GenericDao.CONNECTION_PROPERTIES_FILE_PATH));
         } catch (IOException e) {
             log.error(e);
         }

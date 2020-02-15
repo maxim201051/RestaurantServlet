@@ -9,7 +9,6 @@ import ua.training.restaurant.entity.order.Order;
 import ua.training.restaurant.entity.order.Order_Status;
 import ua.training.restaurant.entity.user.User;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.*;
 import java.text.MessageFormat;
@@ -33,9 +32,8 @@ public class JDBCOrderDao implements OrderDao {
 
     public JDBCOrderDao(Connection connection) {
         try {
-            FileInputStream fis = new FileInputStream(GenericDao.PROPERTY_FILE_PATH);
             this.prop = new Properties();
-            this.prop.load(fis);
+            this.prop.load(JDBCOrderDao.class.getClassLoader().getResourceAsStream(GenericDao.PROPERTY_FILE_PATH));
         } catch (IOException e) {
             log.error(e);
             throw new RuntimeException(e);
@@ -75,7 +73,7 @@ public class JDBCOrderDao implements OrderDao {
                 Order order = orderMapper.extractFromResultSet(rs);
                 orders.add(order);
             }
-            orders=orderMapper.combine(orders);
+            orders = orderMapper.combine(orders);
         } catch (SQLException ignored) {
         }
         return orders;
@@ -122,8 +120,8 @@ public class JDBCOrderDao implements OrderDao {
     }
 
     private String castDateOrNull(LocalDateTime time) {
-        if(time != null) {
-            return "'"+Timestamp.valueOf(time).toString()+"'";
+        if (time != null) {
+            return "'" + Timestamp.valueOf(time).toString() + "'";
         }
         return "null";
     }

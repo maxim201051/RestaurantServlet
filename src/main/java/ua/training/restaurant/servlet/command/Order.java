@@ -1,7 +1,6 @@
 package ua.training.restaurant.servlet.command;
 
 import org.apache.log4j.Logger;
-import ua.training.restaurant.exceptions.OrderNotFoundException;
 import ua.training.restaurant.service.OrderService;
 import ua.training.restaurant.service.OrderServiceImpl;
 

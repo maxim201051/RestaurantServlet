@@ -25,7 +25,7 @@ public class ConcreteUserStatistic implements Command {
         User user = (User) request.getSession().getAttribute("loginedUser");
         if (user.getAuthorities().get(0).equals(Role.USER)) {
             try {
-                request.setAttribute("orders",orderService.findByUser(user));
+                request.setAttribute("orders", orderService.findByUser(user));
             } catch (Exception e) {
                 log.error(e);
             }

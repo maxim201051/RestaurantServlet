@@ -33,7 +33,7 @@ public class PayBill implements Command {
             order = orderService.findById(id);
             userService.addOrderToStatistic(user, order);
             orderService.setPaid(order);
-            service.saveUserAndOrder(user,order);
+            service.saveUserAndOrder(user, order);
         } catch (OrderNotFoundException e) {
             log.error("cannot find order by id " + id);
             request.setAttribute("failureMessage", "failureMessage");
