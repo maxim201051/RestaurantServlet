@@ -2,7 +2,6 @@ package ua.training.restaurant.service;
 
 import ua.training.restaurant.entity.order.Order;
 import ua.training.restaurant.entity.user.User;
-import ua.training.restaurant.exceptions.UserNotFoundException;
 
 import java.util.List;
 

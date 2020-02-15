@@ -4,8 +4,6 @@ import ua.training.restaurant.entity.Dish;
 import ua.training.restaurant.entity.order.Order;
 import ua.training.restaurant.entity.order.Order_Status;
 import ua.training.restaurant.entity.user.User;
-import ua.training.restaurant.exceptions.EmptyOrderException;
-import ua.training.restaurant.exceptions.OrderNotFoundException;
 
 import java.util.List;
 

@@ -6,7 +6,6 @@ import ua.training.restaurant.dao.GenericDao;
 import ua.training.restaurant.dao.mapper.DishMapper;
 import ua.training.restaurant.entity.Dish;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -28,9 +27,8 @@ public class JDBCDishDao implements DishDao {
 
     public JDBCDishDao(Connection connection) {
         try {
-            FileInputStream fis = new FileInputStream(GenericDao.PROPERTY_FILE_PATH);
             this.prop = new Properties();
-            this.prop.load(fis);
+            this.prop.load(JDBCDishDao.class.getClassLoader().getResourceAsStream(GenericDao.PROPERTY_FILE_PATH));
         } catch (IOException e) {
             log.error(e);
             throw new RuntimeException(e);
@@ -56,7 +54,7 @@ public class JDBCDishDao implements DishDao {
     @Override
     public List<Dish> findAll(int firstIndex, int elementsNumber) {
         List<Dish> dishes = new ArrayList<>();
-        String query = MessageFormat.format(prop.getProperty("dishes.findAll"),elementsNumber, firstIndex);
+        String query = MessageFormat.format(prop.getProperty("dishes.findAll"), elementsNumber, firstIndex);
         try (Statement st = connection.createStatement()) {
             ResultSet rs = st.executeQuery(query);
             DishMapper dishMapper = new DishMapper();

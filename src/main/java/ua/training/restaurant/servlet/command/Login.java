@@ -1,10 +1,7 @@
 package ua.training.restaurant.servlet.command;
 
 import org.apache.log4j.Logger;
-import ua.training.restaurant.dao.DaoFactory;
-import ua.training.restaurant.dao.UserDao;
 import ua.training.restaurant.entity.user.User;
-import ua.training.restaurant.service.OrderService;
 import ua.training.restaurant.service.UserService;
 import ua.training.restaurant.service.UserServiceImpl;
 import ua.training.restaurant.utils.AppUtils;
@@ -43,7 +40,7 @@ public class Login implements Command {
         String password = request.getParameter("password");
         User user;
         try {
-            user = userService.findByUsernameAndPassword(username,password);
+            user = userService.findByUsernameAndPassword(username, password);
         } catch (Exception e) {
             log.error(e);
             String errorMessage = "errorMessage";

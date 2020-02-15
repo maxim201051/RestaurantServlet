@@ -17,8 +17,8 @@ public class DishServiceImpl implements DishService {
     public List<Dish> findAll(int page, int recordsPerPage) throws Exception {
         int firstIndex = page * recordsPerPage;
         try (DishDao dao = daoFactory.createDishDao()) {
-            List<Dish> dishes=dao.findAll(firstIndex, recordsPerPage);
-            if (dishes.size() == 0){
+            List<Dish> dishes = dao.findAll(firstIndex, recordsPerPage);
+            if (dishes.size() == 0) {
                 throw new RuntimeException();
             }
             return dishes;
