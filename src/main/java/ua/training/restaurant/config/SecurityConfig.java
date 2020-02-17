@@ -8,8 +8,6 @@ import java.util.*;
  * Created by Student on 25.01.2020
  */
 public class SecurityConfig {
-    // String: Role
-    // List<String>: urlPatterns.
     private static final Map<String, List<String>> mapConfig = new HashMap<>();
 
     static {

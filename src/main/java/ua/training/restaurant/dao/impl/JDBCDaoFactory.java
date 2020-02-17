@@ -4,6 +4,7 @@ import ua.training.restaurant.dao.DaoFactory;
 import ua.training.restaurant.dao.DishDao;
 import ua.training.restaurant.dao.OrderDao;
 import ua.training.restaurant.dao.UserDao;
+import ua.training.restaurant.exceptions.DatabaseConnectionException;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -34,7 +35,7 @@ public class JDBCDaoFactory extends DaoFactory {
         try {
             return dataSource.getConnection();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new DatabaseConnectionException(e.getMessage());
         }
     }
 }

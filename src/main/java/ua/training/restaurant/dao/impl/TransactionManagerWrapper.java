@@ -8,7 +8,6 @@ import java.sql.SQLException;
  * Created by Student on 13.02.2020
  */
 public class TransactionManagerWrapper {
-
     private static final Logger LOG = Logger.getLogger(TransactionManager.class);
 
     private static ThreadLocal<ConnectionWrapper> th = new ThreadLocal<>();

@@ -12,7 +12,7 @@ import java.util.Properties;
  * Created by Student on 26.01.2020
  */
 public class ConnectionPoolHolder {
-    final static Logger log = Logger.getLogger(ConnectionPoolHolder.class);
+    private final static Logger log = Logger.getLogger(ConnectionPoolHolder.class);
     private static volatile DataSource dataSource;
     private static Properties prop;
 

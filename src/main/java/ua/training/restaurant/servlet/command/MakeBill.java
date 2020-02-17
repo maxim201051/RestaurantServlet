@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
  * Created by Student on 03.02.2020
  */
 public class MakeBill implements Command {
-    final static Logger log = Logger.getLogger(MakeBill.class);
+    private final static Logger log = Logger.getLogger(MakeBill.class);
     private OrderService orderService;
 
     public MakeBill() {

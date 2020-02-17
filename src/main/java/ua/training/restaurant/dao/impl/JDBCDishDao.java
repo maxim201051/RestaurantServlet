@@ -5,6 +5,8 @@ import ua.training.restaurant.dao.DishDao;
 import ua.training.restaurant.dao.GenericDao;
 import ua.training.restaurant.dao.mapper.DishMapper;
 import ua.training.restaurant.entity.Dish;
+import ua.training.restaurant.exceptions.DatabaseClosingException;
+import ua.training.restaurant.exceptions.PropertyFileNotFoundIOExceprion;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -21,7 +23,7 @@ import java.util.Properties;
  * Created by Student on 26.01.2020
  */
 public class JDBCDishDao implements DishDao {
-    final static Logger log = Logger.getLogger(JDBCDishDao.class);
+    private final static Logger log = Logger.getLogger(JDBCDishDao.class);
     private Connection connection;
     private Properties prop;
 
@@ -31,7 +33,7 @@ public class JDBCDishDao implements DishDao {
             this.prop.load(JDBCDishDao.class.getClassLoader().getResourceAsStream(GenericDao.PROPERTY_FILE_PATH));
         } catch (IOException e) {
             log.error(e);
-            throw new RuntimeException(e);
+            throw new PropertyFileNotFoundIOExceprion(e.getMessage());
         }
         this.connection = connection;
     }
@@ -62,7 +64,8 @@ public class JDBCDishDao implements DishDao {
                 Dish dish = dishMapper.extractFromResultSet(rs);
                 dishes.add(dish);
             }
-        } catch (SQLException ignored) {
+        } catch (SQLException e) {
+            log.error(e);
         }
         return dishes;
     }
@@ -72,7 +75,7 @@ public class JDBCDishDao implements DishDao {
         try {
             connection.close();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new DatabaseClosingException(e.getMessage());
         }
     }
 }
