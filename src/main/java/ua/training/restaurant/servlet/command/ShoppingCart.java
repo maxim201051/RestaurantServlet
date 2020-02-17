@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
  * Created by Student on 29.01.2020
  */
 public class ShoppingCart implements Command {
-    final static Logger log = Logger.getLogger(ShoppingCart.class);
+    private final static Logger log = Logger.getLogger(ShoppingCart.class);
 
     public String execute(HttpServletRequest request) {
         String res = null;

@@ -10,7 +10,7 @@ import static java.time.LocalDateTime.now;
  * Created by Student
  */
 public class KitchenService {
-    final static Logger log = Logger.getLogger(KitchenService.class);
+    private final static Logger log = Logger.getLogger(KitchenService.class);
 
     public static Order cookDishes(Order order) {
         log.info("Order is cooking");

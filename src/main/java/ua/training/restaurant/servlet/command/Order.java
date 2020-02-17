@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
  * Created by Student on 29.01.2020
  */
 public class Order implements Command {
-    final static Logger log = Logger.getLogger(Order.class);
+    private final static Logger log = Logger.getLogger(Order.class);
     private OrderService orderService;
 
     public Order() {

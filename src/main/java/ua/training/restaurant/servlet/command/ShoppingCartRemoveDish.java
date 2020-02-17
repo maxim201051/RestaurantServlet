@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletRequest;
  * Created by Student on 03.02.2020
  */
 public class ShoppingCartRemoveDish implements Command {
-    final static Logger log = Logger.getLogger(ShoppingCartRemoveDish.class);
+    private final static Logger log = Logger.getLogger(ShoppingCartRemoveDish.class);
     private OrderService orderService;
     private DishService dishService;
 

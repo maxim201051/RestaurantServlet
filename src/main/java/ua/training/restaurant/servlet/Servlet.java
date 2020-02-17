@@ -17,6 +17,7 @@ import java.util.Map;
  */
 @WebServlet(name = "Servlet", urlPatterns = "/")
 public class Servlet extends HttpServlet {
+    private final static String REDIRECT_URL="redirect:";
     private Map<String, Command> commands = new HashMap<>();
 
     public void init(ServletConfig servletConfig) {
@@ -57,8 +58,8 @@ public class Servlet extends HttpServlet {
         Command command = commands.getOrDefault(path,
                 (r) -> "/error404");
         String page = command.execute(request);
-        if (page.contains("redirect")) {
-            response.sendRedirect(page.replace("redirect:", request.getContextPath()));
+        if (page.contains(REDIRECT_URL)) {
+            response.sendRedirect(page.replace(REDIRECT_URL, request.getContextPath()));
         } else {
             request.getRequestDispatcher(page).forward(request, response);
         }

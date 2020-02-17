@@ -44,10 +44,8 @@ public class AuthFilter implements Filter {
         HttpServletRequest wrapRequest = request;
 
         if (loginedUser != null) {
-            // User Name
             String userName = loginedUser.getUsername();
 
-            // Roles.
             List<String> roles = new ArrayList<>();
             loginedUser.getAuthorities().forEach(a -> roles.add(a.name()));
 
@@ -58,7 +56,6 @@ public class AuthFilter implements Filter {
 
         // Pages requiring login.
         if (SecurityUtils.isSecurityPage(request)) {
-            System.out.println("Security page");
             // If user not logined,
             // Redirect to login page.
             if (loginedUser == null) {
@@ -79,7 +76,6 @@ public class AuthFilter implements Filter {
                 RequestDispatcher dispatcher //
                         = request.getServletContext().getRequestDispatcher("/" +
                         loginedUser.getAuthorities().get(0).name().toLowerCase());
-                System.out.println("request: " + request.getRequestURI());
                 dispatcher.forward(request, response);
                 return;
             }

@@ -4,6 +4,8 @@ import ua.training.restaurant.dao.DaoFactory;
 import ua.training.restaurant.dao.DishDao;
 import ua.training.restaurant.entity.Dish;
 import ua.training.restaurant.exceptions.DishNotFoundException;
+import ua.training.restaurant.exceptions.EmptyDishesListException;
+import ua.training.restaurant.exceptions.EmptyOrderException;
 
 import java.util.List;
 
@@ -19,7 +21,7 @@ public class DishServiceImpl implements DishService {
         try (DishDao dao = daoFactory.createDishDao()) {
             List<Dish> dishes = dao.findAll(firstIndex, recordsPerPage);
             if (dishes.size() == 0) {
-                throw new RuntimeException();
+                throw new EmptyDishesListException();
             }
             return dishes;
         }

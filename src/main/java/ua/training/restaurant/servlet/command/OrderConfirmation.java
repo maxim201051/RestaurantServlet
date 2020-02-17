@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
  * Created by Student on 29.01.2020
  */
 public class OrderConfirmation implements Command {
-    final static Logger log = Logger.getLogger(OrderConfirmation.class);
+    private final static Logger log = Logger.getLogger(OrderConfirmation.class);
     private OrderService orderService;
 
     public OrderConfirmation() {

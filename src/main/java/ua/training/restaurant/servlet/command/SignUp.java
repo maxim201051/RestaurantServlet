@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
  * Created by Student on 22.01.2020
  */
 public class SignUp implements Command {
-    final static Logger log = Logger.getLogger(SignUp.class);
+    private final static Logger log = Logger.getLogger(SignUp.class);
     private UserService userService;
 
     public SignUp() {

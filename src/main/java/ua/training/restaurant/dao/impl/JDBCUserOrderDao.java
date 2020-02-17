@@ -7,6 +7,7 @@ import ua.training.restaurant.dao.UserDao;
 import ua.training.restaurant.dao.UserOrderDao;
 import ua.training.restaurant.entity.order.Order;
 import ua.training.restaurant.entity.user.User;
+import ua.training.restaurant.exceptions.TransactionException;
 
 import java.sql.SQLException;
 
@@ -14,7 +15,7 @@ import java.sql.SQLException;
  * Created by Student on 13.02.2020
  */
 public class JDBCUserOrderDao implements UserOrderDao {
-    final static Logger log = Logger.getLogger(JDBCUserDao.class);
+    private final static Logger log = Logger.getLogger(JDBCUserDao.class);
 
     @Override
     public boolean saveUserAndOrder(User user, Order order) {
@@ -29,7 +30,7 @@ public class JDBCUserOrderDao implements UserOrderDao {
         } catch (SQLException e) {
             TransactionManagerWrapper.rollback();
             log.error(e);
-            throw new RuntimeException(e);
+            throw new TransactionException(e.getMessage());
         } catch (Exception e) {
             log.error(e);
         }

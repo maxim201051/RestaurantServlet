@@ -16,7 +16,7 @@ import java.util.List;
  * Created by Student on 29.01.2020
  */
 public class BillPaying implements Command {
-    final static Logger log = Logger.getLogger(BillPaying.class);
+    private final static Logger log = Logger.getLogger(BillPaying.class);
     private OrderService orderService;
 
     public BillPaying() {

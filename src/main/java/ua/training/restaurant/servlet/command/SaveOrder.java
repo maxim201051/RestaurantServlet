@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
  * Created by Student on 02.02.2020
  */
 public class SaveOrder implements Command {
-    final static Logger log = Logger.getLogger(SaveOrder.class);
+    private final static Logger log = Logger.getLogger(SaveOrder.class);
     private OrderService orderService;
 
     public SaveOrder() {

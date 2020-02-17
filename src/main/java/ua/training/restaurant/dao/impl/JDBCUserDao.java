@@ -6,6 +6,8 @@ import ua.training.restaurant.dao.UserDao;
 import ua.training.restaurant.dao.mapper.UserMapper;
 import ua.training.restaurant.entity.user.Role;
 import ua.training.restaurant.entity.user.User;
+import ua.training.restaurant.exceptions.DatabaseClosingException;
+import ua.training.restaurant.exceptions.PropertyFileNotFoundIOExceprion;
 
 import java.io.IOException;
 import java.sql.*;
@@ -20,7 +22,7 @@ import java.util.Properties;
  * Created by Student on 26.01.2020
  */
 public class JDBCUserDao implements UserDao {
-    final static Logger log = Logger.getLogger(JDBCUserDao.class);
+    private final static Logger log = Logger.getLogger(JDBCUserDao.class);
     private Connection connection;
     private Properties prop;
 
@@ -30,7 +32,7 @@ public class JDBCUserDao implements UserDao {
             this.prop.load(JDBCUserDao.class.getClassLoader().getResourceAsStream(GenericDao.PROPERTY_FILE_PATH));
         } catch (IOException e) {
             log.error(e);
-            throw new RuntimeException(e);
+            throw new PropertyFileNotFoundIOExceprion(e.getMessage());
         }
         this.connection = connection;
     }
@@ -81,7 +83,8 @@ public class JDBCUserDao implements UserDao {
                 User user = userMapper.extractFromResultSet(rs);
                 users.add(user);
             }
-        } catch (SQLException ignored) {
+        } catch (SQLException e) {
+            log.error(e);
         }
         return users;
     }
@@ -116,7 +119,7 @@ public class JDBCUserDao implements UserDao {
         try {
             connection.close();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new DatabaseClosingException(e.getMessage());
         }
     }
 }

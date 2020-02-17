@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServletRequest;
  * Created by Student on 29.01.2020
  */
 public class FoodMenu implements Command {
-    public static final int RECORDS_PER_PAGE = 10;
-    final static Logger log = Logger.getLogger(FoodMenu.class);
+    private static final int RECORDS_PER_PAGE = 10;
+    private final static Logger log = Logger.getLogger(FoodMenu.class);
     private DishService dishService;
 
     public FoodMenu() {

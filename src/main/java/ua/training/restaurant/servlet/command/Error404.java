@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
  * Created by Student on 29.01.2020
  */
 public class Error404 implements Command {
-    final static Logger log = Logger.getLogger(Error404.class);
+    private final static Logger log = Logger.getLogger(Error404.class);
 
     @Override
     public String execute(HttpServletRequest request) {

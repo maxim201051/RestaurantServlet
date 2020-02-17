@@ -8,6 +8,8 @@ import ua.training.restaurant.entity.OrderUnit;
 import ua.training.restaurant.entity.order.Order;
 import ua.training.restaurant.entity.order.Order_Status;
 import ua.training.restaurant.entity.user.User;
+import ua.training.restaurant.exceptions.DatabaseClosingException;
+import ua.training.restaurant.exceptions.PropertyFileNotFoundIOExceprion;
 
 import java.io.IOException;
 import java.sql.*;
@@ -23,7 +25,7 @@ import java.util.Properties;
  * Created by Student on 26.01.2020
  */
 public class JDBCOrderDao implements OrderDao {
-    final static Logger log = Logger.getLogger(JDBCOrderDao.class);
+    private final static Logger log = Logger.getLogger(JDBCOrderDao.class);
     private static final String SEARCH_COLUMN_ORDER_ID = "order_id";
     private static final String SEARCH_COLUMN_STATUS = "status";
     private static final String SEARCH_COLUMN_USER_ID = "orders.user_id";
@@ -36,7 +38,7 @@ public class JDBCOrderDao implements OrderDao {
             this.prop.load(JDBCOrderDao.class.getClassLoader().getResourceAsStream(GenericDao.PROPERTY_FILE_PATH));
         } catch (IOException e) {
             log.error(e);
-            throw new RuntimeException(e);
+            throw new PropertyFileNotFoundIOExceprion(e.getMessage());
         }
         this.connection = connection;
     }
@@ -74,7 +76,8 @@ public class JDBCOrderDao implements OrderDao {
                 orders.add(order);
             }
             orders = orderMapper.combine(orders);
-        } catch (SQLException ignored) {
+        } catch (SQLException e) {
+            log.error(e);
         }
         return orders;
     }
@@ -131,7 +134,7 @@ public class JDBCOrderDao implements OrderDao {
         try {
             connection.close();
         } catch (SQLException e) {
-            log.error("unable to close db connection " + e.getMessage());
+            throw new DatabaseClosingException(e.getMessage());
         }
     }
 }
