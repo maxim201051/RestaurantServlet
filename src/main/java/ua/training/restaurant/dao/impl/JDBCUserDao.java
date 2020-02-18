@@ -1,6 +1,7 @@
 package ua.training.restaurant.dao.impl;
 
 import org.apache.log4j.Logger;
+import ua.training.restaurant.bcrypt.BCrypt;
 import ua.training.restaurant.dao.GenericDao;
 import ua.training.restaurant.dao.UserDao;
 import ua.training.restaurant.dao.mapper.UserMapper;
@@ -16,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Properties;
+import java.util.concurrent.atomic.AtomicReference;
 
 
 /**
@@ -45,8 +47,14 @@ public class JDBCUserDao implements UserDao {
 
     @Override
     public Optional<User> findByUsernameAndPassword(String username, String password) {
-        String query = MessageFormat.format(prop.getProperty("users.findByUsernameAndPassword"), "'" + username + "'", "'" + password + "'");
-        return findUser(query);
+        String query = MessageFormat.format(prop.getProperty("users.findByUsername"), "'" + username + "'");
+        AtomicReference<String> hashPass = new AtomicReference<>("");
+        Optional<User> user = findUser(query);
+        user.ifPresent(u-> hashPass.set(u.getPassword()));
+        if ( !BCrypt.checkpw(password, hashPass.get())) {
+            user=Optional.empty();
+        }
+        return user;
     }
 
     private Optional<User> findUser(String query) {
@@ -106,7 +114,6 @@ public class JDBCUserDao implements UserDao {
     }
 
     private User saveOrUpdate(User user, String query) throws SQLException {
-
         log.info(query);
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.executeUpdate();
