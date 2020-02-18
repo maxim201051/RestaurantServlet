@@ -1,6 +1,7 @@
 package ua.training.restaurant.servlet.command;
 
 import org.apache.log4j.Logger;
+import ua.training.restaurant.bcrypt.BCrypt;
 import ua.training.restaurant.entity.user.User;
 import ua.training.restaurant.exceptions.UserDataNotValidException;
 import ua.training.restaurant.service.UserService;
@@ -43,7 +44,7 @@ public class SignUp implements Command {
             Validator.throwExIfUserNotValid(username, password, nameEn, nameUa);
             User user = new User();
             user.setUsername(username);
-            user.setPassword(password);
+            user.setPassword(BCrypt.hashpw(password,BCrypt.gensalt()));
             user.setNameEN(nameEn);
             user.setNameUA(nameUa);
             userService.setDefaultParams(user);

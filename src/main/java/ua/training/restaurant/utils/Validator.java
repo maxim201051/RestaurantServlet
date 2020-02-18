@@ -15,7 +15,12 @@ public class Validator {
     }
 
     public static void throwExIfUserNotValid(String username, String password, String nameEn, String nameUa) throws UserDataNotValidException {
-        Pattern p = Pattern.compile(RegexContainer.NAME_REGEX_UA, Pattern.UNICODE_CHARACTER_CLASS);
+        Pattern p = null;
+        try {
+            p = Pattern.compile(RegexContainer.NAME_REGEX_UA, Pattern.UNICODE_CHARACTER_CLASS);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
 
         if (!username.matches(RegexContainer.USERNAME_REGEX) || !nameEn.matches(RegexContainer.NAME_REGEX) || !p.matcher(nameUa).matches() ||
                 password.length() < 3)
