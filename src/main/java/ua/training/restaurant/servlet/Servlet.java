@@ -54,7 +54,7 @@ public class Servlet extends HttpServlet {
 
     private void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String path = request.getRequestURI();
-        path = path.replaceAll(".*/RestaurantServlet_war_exploded/", "");
+        path = path.replaceAll(".*/", "");
         Command command = commands.getOrDefault(path,
                 (r) -> "/error404");
         String page = command.execute(request);
