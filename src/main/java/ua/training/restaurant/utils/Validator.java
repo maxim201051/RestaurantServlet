@@ -10,8 +10,9 @@ import java.util.regex.Pattern;
  */
 public class Validator {
     public static void throwExIfFundsNotValid(Long funds) {
-        if (funds <= 0 || funds > 100000)
+        if (funds <= 0 || funds > 100000) {
             throw new IllegalArgumentException();
+        }
     }
 
     public static void throwExIfUserNotValid(String username, String password, String nameEn, String nameUa) throws UserDataNotValidException {
